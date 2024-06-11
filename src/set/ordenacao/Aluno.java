@@ -1,5 +1,6 @@
 package set.ordenacao;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Aluno implements Comparable<Aluno>{
@@ -27,6 +28,19 @@ public class Aluno implements Comparable<Aluno>{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aluno aluno = (Aluno) o;
+        return getMatricula() == aluno.getMatricula();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getMatricula());
+    }
+
+    @Override
     public String toString() {
         return "Aluno{" +
                 "nome='" + nome + '\'' +
@@ -38,6 +52,14 @@ public class Aluno implements Comparable<Aluno>{
     @Override
     public int compareTo(Aluno o) {
         return 0;
+    }
+
+    static class ComparatorNota implements Comparator<Aluno> {
+
+        @Override
+        public int compare(Aluno a1, Aluno a2) {
+            return Double.compare(a1.getMedia(), a2.getMedia());
+        }
     }
 
 }

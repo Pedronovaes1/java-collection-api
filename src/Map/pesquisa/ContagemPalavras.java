@@ -23,7 +23,7 @@ public class ContagemPalavras {
         }
     }
 
-    public int exibirContagemPalvras(){
+    public int exibirContagemPalavras(){
         int contagemTotal = 0;
         if(!palavras.isEmpty()){
             for(Map.Entry<String, Integer> palavra : this.palavras.entrySet()){
@@ -34,6 +34,35 @@ public class ContagemPalavras {
         }
 
         return contagemTotal;
+    }
+
+    public String encontrarPalavrasMaisFrequente(){
+        String palavraMaisFrequente = null;
+        int maiorContagem = 0;
+        for(Map.Entry<String, Integer> palavra : this.palavras.entrySet()){
+            if(palavra.getValue() > maiorContagem){
+                maiorContagem = palavra.getValue();
+                palavraMaisFrequente = palavra.getKey();
+            }
+        }
+        return palavraMaisFrequente;
+    }
+
+    public static void main(String[] args) {
+        ContagemPalavras contagemLinguagens = new ContagemPalavras();
+
+        // Adiciona linguagens e suas contagens
+        contagemLinguagens.adicionarPalavra("Java", 2);
+        contagemLinguagens.adicionarPalavra("Python", 8);
+        contagemLinguagens.adicionarPalavra("JavaScript", 1);
+        contagemLinguagens.adicionarPalavra("C#", 6);
+
+        // Exibe a contagem total de linguagens
+        System.out.println("Existem " + contagemLinguagens.exibirContagemPalavras() + " palavras.");
+
+        // Encontra e exibe a linguagem mais frequente
+        String linguagemMaisFrequente = contagemLinguagens.encontrarPalavrasMaisFrequente();
+        System.out.println("A linguagem mais frequente é: " + linguagemMaisFrequente);
     }
 
 
